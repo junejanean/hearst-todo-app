@@ -1,0 +1,51 @@
+kind: Deployment
+apiVersion: apps/v1beta1
+metadata:
+  labels:
+    app: resin-cms-interviews
+  name: resin-cms-interviews
+  namespace: default
+spec:
+  replicas: {{ k8s_replicas }}
+  selector:
+    matchLabels:
+      app: resin-cms-interviews
+  revisionHistoryLimit: 5
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: resin-cms-interviews
+    spec:
+      volumes:
+      containers:
+        - name: resin-cms-interviews
+          image: {{ global_registry_host }}/resin-cms-interviews:{{ tag }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "{{ k8s_cpu_requests }}"
+              memory: "{{ k8s_memory_requests }}"
+          env:
+            - name: VAR_NAME
+              value: "{{ var_value }}"
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /health?token="{{ resin-cms-interviews_healthcheck_token }}"
+              port: 80
+              httpHeaders:
+              - name: X-Healthcheck-Light
+                value: "true"
+            initialDelaySeconds: 20
+            periodSeconds: 5
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 15
+      dnsPolicy: "ClusterFirst"
