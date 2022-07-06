@@ -1,6 +1,9 @@
 import React from "react";
 import "./App.css";
 
+// Copy and pasted from:
+// https://www.digitalocean.com/community/tutorials/how-to-build-a-react-to-do-app-with-react-hooks
+
 function Todo({ todo, index, completeTodo, removeTodo }) {
   return (
     <div

@@ -31,9 +31,6 @@ spec:
             requests:
               cpu: "{{ k8s_cpu_requests }}"
               memory: "{{ k8s_memory_requests }}"
-          env:
-            - name: VAR_NAME
-              value: "{{ var_value }}"
           ports:
           - containerPort: 80
             protocol: TCP
