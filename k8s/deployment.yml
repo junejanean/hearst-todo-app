@@ -31,21 +31,9 @@ spec:
             requests:
               cpu: "{{ k8s_cpu_requests }}"
               memory: "{{ k8s_memory_requests }}"
-          env:
-            - name: VAR_NAME
-              value: "{{ var_value }}"
           ports:
           - containerPort: 80
             protocol: TCP
-          readinessProbe:
-            httpGet:
-              path: /health?token="{{ resin-cms-interviews_healthcheck_token }}"
-              port: 80
-              httpHeaders:
-              - name: X-Healthcheck-Light
-                value: "true"
-            initialDelaySeconds: 20
-            periodSeconds: 5
       restartPolicy: Always
       terminationGracePeriodSeconds: 15
       dnsPolicy: "ClusterFirst"
