@@ -36,7 +36,7 @@ spec:
             protocol: TCP
           readinessProbe:
             httpGet:
-              path: /health?token="{{ resin_cms_interviews_healthcheck_token }}"
+              path: /?token="{{ resin_cms_interviews_healthcheck_token }}"
               port: 80
               httpHeaders:
               - name: X-Healthcheck-Light
