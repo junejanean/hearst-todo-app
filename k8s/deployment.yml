@@ -34,15 +34,6 @@ spec:
           ports:
           - containerPort: 80
             protocol: TCP
-          readinessProbe:
-            httpGet:
-              path: /?token="{{ resin_cms_interviews_healthcheck_token }}"
-              port: 80
-              httpHeaders:
-              - name: X-Healthcheck-Light
-                value: "true"
-            initialDelaySeconds: 20
-            periodSeconds: 5
       restartPolicy: Always
       terminationGracePeriodSeconds: 15
       dnsPolicy: "ClusterFirst"
