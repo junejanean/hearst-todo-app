@@ -22,6 +22,12 @@
   margin-bottom: 6px;
   padding: 3px 10px;
 }
+form {
+  display: flex;
+}
+.add {
+  justify-content: end;
+}
 .complete {
   text-decoration: line-through;
 }
