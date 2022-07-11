@@ -22,3 +22,6 @@
   margin-bottom: 6px;
   padding: 3px 10px;
 }
+.complete {
+  text-decoration: line-through;
+}
